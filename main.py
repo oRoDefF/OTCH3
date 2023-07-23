@@ -29,3 +29,25 @@ with open('recipes.txt', 'rt', encoding='utf-8') as file:
 
 print()
 print()
+
+
+#ЗАДАНИЕ 2
+def get_shop_list_by_dishes(dishes, person_count):
+    result = {}
+    for dish in dishes:
+        recipe = cook_book[dish]
+        for ingridient in recipe:
+            key = ingridient['ingredient_name']
+            if key not in result:
+                new_dict = {
+                    'measure': ingridient['measure'],
+                    'quantity': int(ingridient['quantity']) * person_count
+
+                }
+                result[key] = new_dict
+            else:
+                result[key]['quantity'] += int(ingridient['quantity']) * person_count
+
+    pprint(result, sort_dicts=False)
+
+get_shop_list_by_dishes(['Запеченный картофель', 'Омлет', 'Фахитос'], 2)
